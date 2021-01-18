@@ -30,16 +30,26 @@ CHIP = esp32
 #FIRMWARE = esp32spiram-idf3-20200902-v1.13.bin
 FIRMWARE = esp32-idf3-20200902-v1.13.bin
 
+frameworks:
+	sudo rm -rf micropython
+	sudo rm -rf micropyserver
+	sudo rm -rf mpython-docs
+	git clone https://github.com/micropython/micropython.git
+	git clone https://github.com/troublegum/micropyserver.git
+	git clone https://github.com/labplus-cn/mpython-docs.git
+
 setup_dev:
 	sudo apt-get install git wget flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache libffi-dev libssl-dev dfu-util
 	sudo apt-get install esptool
 	sudo apt install picocom
 	pip3 install -r requirements.txt
+	make frameworks
 
 setup_dev_mac:
 	brew install esptool
 	brew install picocom
 	pip install -r requirements.txt
+	make frameworks
 
 info:
 	esptool --port $(PORT) --before default_reset --baud $(BAUDRATE) --after hard_reset read_flash_status
@@ -68,6 +78,10 @@ micropython_bin: # 1M of flash # other bin's: http://micropython.org/download/es
 erase_flash:
 	esptool --chip $(CHIP) --port $(PORT) --baud $(BAUDRATE) erase_flash
 
+# Work with esp
+burn:
+	esptool --chip $(CHIP) --port $(PORT) --baud $(BAUDRATE) write_flash 0x00000 project.bin
+
 repl:
 	picocom $(PORT) -b$(BAUDRATE)
 	#minicom --device $(PORT) -b $(BAUDRATE)
@@ -77,22 +91,16 @@ upload:
 
 run:
 	ampy --port $(PORT) run main.py
-get:
-	ampy --port $(PORT) get main.py
+
+getboot:
+	ampy --port $(PORT) --baud $(BAUDRATE) get boot.py
 
 burn_micro:	#default baud rate 115200
 	esptool --chip $(CHIP) --port $(PORT) --baud 460800 write_flash -z 0x1000 $(FIRMWARE)
 
-# Work with esp
-burn:
-	esptool --chip $(CHIP) --port $(PORT) --baud $(BAUDRATE) write_flash 0x00000 project.bin
-
 #CH340 drivers
 get_CH340_lin:
 	wget https://sparks.gogo.co.nz/assets/_site_/downloads/CH340_LINUX.zip
-
-get_CH340_win:
-	wget https://sparks.gogo.co.nz/assets/_site_/downloads/CH34x_Install_Windows_v3_4.zip
 
 get_CH340_mac:
 	wget https://github.com/adrianmihalko/ch340g-ch34g-ch34x-mac-os-x-driver/blob/master/CH34x_Install_V1.5.pkg

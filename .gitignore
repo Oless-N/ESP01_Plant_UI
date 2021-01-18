@@ -1,5 +1,7 @@
 /*.bin
 /*.pkg
+/.idea/
 /venv/
 /micropython/
-/.idea/
+/mpython-docs/
+/micropyserver/

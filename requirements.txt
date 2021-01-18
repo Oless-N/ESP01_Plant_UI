@@ -1,3 +1,6 @@
 esptool==2.8
 pyserial==3.5
 adafruit-ampy==1.0.7
+esp==0.2.0
+Sphinx==3.4.3
+sphinx-rtd-theme==0.5.1
