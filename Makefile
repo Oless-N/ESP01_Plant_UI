@@ -25,16 +25,18 @@ BAUDRATE = 115200
 CHIP = esp32
 
 #FIRMWARE = esp8266-1m-20200902-v1.13.bin
+#FIRMWARE = esp32spiram-idf3-20200902-v1.13.bin
 FIRMWARE = esp32-idf3-20200902-v1.13.bin
 
 setup_dev:
+	sudo apt-get install git wget flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache libffi-dev libssl-dev dfu-util
 	sudo apt-get install esptool
-	pip install -r requirements.txt
+	sudo apt install picocom
+	pip3 install -r requirements.txt
 
-check_esp:
-	#sudo esptool --chip $(CHIP) --port $(PORT) --baud $(BAUDRATE) --before default_reset --after hard_reset flash_id
-	esptool --port $(PORT) --before default_reset --baud $(BAUDRATE) --after hard_reset flash_id
-	esptool --port $(PORT) --before de4fault_reset --baud $(BAUDRATE) --after hard_reset flash_id
+info:
+	esptool --port $(PORT) --before default_reset --baud $(BAUDRATE) --after hard_reset read_flash_status
+
 
 ports:
 	dmesg | grep tty
@@ -43,22 +45,39 @@ permission:
 	sudo chmod +x $(PORT)
 	sudo chmod +x venv/lib/python3.8/site-packages/esptool.py
 
-read_flash:
+flash_info:
 	esptool --chip $(CHIP) --port $(PORT) --baud $(BAUDRATE) read_flash_status
+
+backup:
+	esptool --chip $(CHIP) --port $(PORT) --baud $(BAUDRATE) 0x00000 0x400000 backup.bin
+
 
 # Prepare for micropiton
 micropython_bin: # 1M of flash # other bin's: http://micropython.org/download/esp8266/
+	rm -rf $(FIRMWARE)
 	wget http://micropython.org/resources/firmware/$(FIRMWARE)
 
-clear_esp:
-	esptool.py --chip $(CHIP) --port $(PORT) --baud $(BAUDRATE) erase_flash
+erase_flash:
+	esptool --chip $(CHIP) --port $(PORT) --baud $(BAUDRATE) erase_flash
+
+repl:
+	picocom $(PORT) -b$(BAUDRATE)
+	#minicom --device $(PORT) -b $(BAUDRATE)
+
+upload:
+	ampy --port $(PORT) put main.py
+
+run:
+	ampy --port $(PORT) run main.py
+get:
+	ampy --port $(PORT) get main.py
 
 burn_micro:	#default baud rate 115200
-	esptool.py --chip $(CHIP) --port $(PORT) --baud $(BAUDRATE) write_flash --flash_size=detect 0 $(FIRMWARE)
+	esptool --chip $(CHIP) --port $(PORT) --baud 460800 write_flash -z 0x1000 $(FIRMWARE)
 
-burn_micro_autoport:
-	esptool.py --port /dev/$(ls /dev | grep cu.wchusbserial) erase_flash
-
+# Work with esp
+burn:
+	esptool --chip $(CHIP) --port $(PORT) --baud $(BAUDRATE) write_flash 0x00000 project.bin
 
 #CH340 drivers
 get_CH340_lin:
