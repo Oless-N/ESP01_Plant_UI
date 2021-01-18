@@ -14,8 +14,9 @@
 ## verify_flash, erase_flash, erase_region, version                ##
 #####################################################################
 
-PORT = /dev/ttyUSB0
+#PORT = /dev/ttyUSB0
 #PORT = /dev/ttyUSB1
+PORT = /dev/cu.usbserial-0001
 
 #BAUDRATE = 460800
 BAUDRATE = 115200
@@ -35,12 +36,18 @@ setup_dev:
 	sudo apt install picocom
 	pip3 install -r requirements.txt
 
+setup_dev_mac:
+	brew install esptool
+	brew install picocom
+	pip install -r requirements.txt
+
 info:
 	esptool --port $(PORT) --before default_reset --baud $(BAUDRATE) --after hard_reset read_flash_status
 
-
 ports:
-	dmesg | grep tty
+	# dmesg | grep tty
+	ls /dev/tty.*
+	ls /dev/cu.*
 
 permission:
 	sudo chmod +x $(PORT)
