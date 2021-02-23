@@ -23,12 +23,16 @@ BAUDRATE = 115200
 #BAUDRATE = 57600
 #BAUDRATE = 9600
 
-#CHIP = esp8266
-CHIP = esp32
+CHIP = esp8266
+#CHIP = esp32
 
+FIRMWARE = esp8266-1m-20210223-unstable-v1.14-81-g53f5bb05a.bin
 #FIRMWARE = esp8266-1m-20200902-v1.13.bin
 #FIRMWARE = esp32spiram-idf3-20200902-v1.13.bin
-FIRMWARE = esp32-idf3-20200902-v1.13.bin
+#FIRMWARE = esp32-idf3-20200902-v1.13.bin
+
+#.PHONY: esptool
+#esptool: esptool.py
 
 frameworks:
 	sudo rm -rf micropython
@@ -76,16 +80,20 @@ micropython_bin: # 1M of flash # other bin's: http://micropython.org/download/es
 	wget http://micropython.org/resources/firmware/$(FIRMWARE)
 
 erase_flash:
-	esptool --chip $(CHIP) --port $(PORT) --baud $(BAUDRATE) erase_flash
+	esptool.py --chip $(CHIP) --port $(PORT) --baud $(BAUDRATE) erase_flash
+
+burn_micro:	#default baud rate 115200
+	esptool.py --chip $(CHIP) --port $(PORT) --baud 460800 write_flash -z 0x1000 $(FIRMWARE)
 
 # Work with esp
-burn:
-	esptool --chip $(CHIP) --port $(PORT) --baud $(BAUDRATE) write_flash 0x00000 project.bin
+burn_custom_bin:
+	esptool.py --chip $(CHIP) --port $(PORT) --baud $(BAUDRATE) write_flash 0x00000 project.bin
 
 repl:
 	picocom $(PORT) -b$(BAUDRATE)
 	#minicom --device $(PORT) -b $(BAUDRATE)
 
+# Work with file at device
 upload:
 	ampy --port $(PORT) put main.py
 
@@ -95,8 +103,6 @@ run:
 getboot:
 	ampy --port $(PORT) --baud $(BAUDRATE) get boot.py
 
-burn_micro:	#default baud rate 115200
-	esptool --chip $(CHIP) --port $(PORT) --baud 460800 write_flash -z 0x1000 $(FIRMWARE)
 
 #CH340 drivers
 get_CH340_lin:
