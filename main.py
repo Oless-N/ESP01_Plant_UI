@@ -1,5 +1,6 @@
 import socket, select
 
+
 def handle_http(client, client_addr):
     client.send("HTTP/1.0 200 OK\r\n\r\nHelloWorld!!!\r\n  %s" % str(client_addr))
     client.close()
@@ -19,5 +20,5 @@ def serv(port=80):
                 client, client_addr = http.accept()
                 handle_http(client, client_addr)
 
-if __name__ == '__main__':
+def main():
     serv()

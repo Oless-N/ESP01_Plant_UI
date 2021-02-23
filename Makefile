@@ -91,6 +91,7 @@ repl:
 
 # Work with file at device
 upload:
+	ampy --port $(PORT) --baud $(BAUDRATE) put boot.py
 	ampy --port $(PORT) --baud $(BAUDRATE) put main.py
 
 ls:
