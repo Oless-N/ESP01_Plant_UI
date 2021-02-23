@@ -4,3 +4,5 @@ adafruit-ampy==1.1.0
 esp==0.2.0
 Sphinx==3.4.3
 sphinx-rtd-theme==0.5.1
+machine==0.0.1
+

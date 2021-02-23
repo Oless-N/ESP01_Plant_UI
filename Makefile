@@ -14,9 +14,9 @@
 ## verify_flash, erase_flash, erase_region, version                ##
 #####################################################################
 
-#PORT = /dev/ttyUSB0
+PORT = /dev/ttyUSB0
 #PORT = /dev/ttyUSB1
-PORT = /dev/cu.usbserial-0001
+#PORT = /dev/cu.usbserial-0001
 
 #BAUDRATE = 460800
 BAUDRATE = 115200
@@ -26,13 +26,12 @@ BAUDRATE = 115200
 CHIP = esp8266
 #CHIP = esp32
 
-FIRMWARE = esp8266-1m-20210223-unstable-v1.14-81-g53f5bb05a.bin
-#FIRMWARE = esp8266-1m-20200902-v1.13.bin
+FIRMWARE = esp8266-1m-20200902-v1.13.bin
 #FIRMWARE = esp32spiram-idf3-20200902-v1.13.bin
 #FIRMWARE = esp32-idf3-20200902-v1.13.bin
 
-#.PHONY: esptool
-#esptool: esptool.py
+.PHONY: esptool
+esptool: esptool.py
 
 frameworks:
 	sudo rm -rf micropython
@@ -55,27 +54,29 @@ setup_dev_mac:
 	pip install -r requirements.txt
 	make frameworks
 
-info:
-	esptool --port $(PORT) --before default_reset --baud $(BAUDRATE) --after hard_reset read_flash_status
-
 ports:
-	# dmesg | grep tty
+	 dmesg | grep tty
+
+ports_mac:
 	ls /dev/tty.*
 	ls /dev/cu.*
 
 permission:
-	sudo chmod +x $(PORT)
+	groups ${USER}
+	sudo gpasswd --add ${USER} dialout
+	sudo chmod 666 $(PORT)
+	sudo chmod +x venv/lib/python3.8/site-packages/ampy
 	sudo chmod +x venv/lib/python3.8/site-packages/esptool.py
 
-flash_info:
-	esptool --chip $(CHIP) --port $(PORT) --baud $(BAUDRATE) read_flash_status
+info:
+	esptool --chip $(CHIP) --port $(PORT) --before default_reset --baud $(BAUDRATE) --after hard_reset read_flash_status
 
 backup:
 	esptool --chip $(CHIP) --port $(PORT) --baud $(BAUDRATE) 0x00000 0x400000 backup.bin
 
 
 # Prepare for micropiton
-micropython_bin: # 1M of flash # other bin's: http://micropython.org/download/esp8266/
+download_micro_bin: # 1M of flash # other bin's: http://micropython.org/download/esp8266/
 	rm -rf $(FIRMWARE)
 	wget http://micropython.org/resources/firmware/$(FIRMWARE)
 
@@ -83,30 +84,20 @@ erase_flash:
 	esptool.py --chip $(CHIP) --port $(PORT) --baud $(BAUDRATE) erase_flash
 
 burn_micro:	#default baud rate 115200
-	esptool.py --chip $(CHIP) --port $(PORT) --baud 460800 write_flash -z 0x1000 $(FIRMWARE)
-
-# Work with esp
-burn_custom_bin:
-	esptool.py --chip $(CHIP) --port $(PORT) --baud $(BAUDRATE) write_flash 0x00000 project.bin
+	esptool.py --chip $(CHIP) --port $(PORT) --baud $(BAUDRATE) write_flash -z 0x00000 $(FIRMWARE)
 
 repl:
 	picocom $(PORT) -b$(BAUDRATE)
-	#minicom --device $(PORT) -b $(BAUDRATE)
 
 # Work with file at device
 upload:
-	ampy --port $(PORT) put main.py
+	ampy --port $(PORT) --baud $(BAUDRATE) put main.py
+
+ls:
+	ampy --port $(PORT) --baud $(BAUDRATE) ls
 
 run:
-	ampy --port $(PORT) run main.py
+	ampy --port $(PORT) --baud $(BAUDRATE) run main.py
 
 getboot:
 	ampy --port $(PORT) --baud $(BAUDRATE) get boot.py
-
-
-#CH340 drivers
-get_CH340_lin:
-	wget https://sparks.gogo.co.nz/assets/_site_/downloads/CH340_LINUX.zip
-
-get_CH340_mac:
-	wget https://github.com/adrianmihalko/ch340g-ch34g-ch34x-mac-os-x-driver/blob/master/CH34x_Install_V1.5.pkg
