@@ -91,8 +91,8 @@ repl:
 
 # Work with file at device
 upload:
-	ampy --port $(PORT) --baud $(BAUDRATE) put app\boot.py
-	ampy --port $(PORT) --baud $(BAUDRATE) put app\main.py
+	#ampy --port $(PORT) --baud $(BAUDRATE) put app\boot.py
+	ampy --port $(PORT) --baud $(BAUDRATE) put $(wildcard *)
 
 ls:
 	ampy --port $(PORT) --baud $(BAUDRATE) ls
