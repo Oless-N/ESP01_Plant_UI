@@ -19,9 +19,6 @@ def serv(port=80):
             for readable in r:
                 client, client_addr = http.accept()
                 handle_http(client, client_addr)
-    # a cюда можно вставить обработку еще-чего-то
-    # а можно вставить такую обработку по таймеру
-
 
 if __name__ == '__main__':
     serv()
