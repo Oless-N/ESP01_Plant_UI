@@ -3,26 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="style.css">
-
     <title>Plant</title>
 </head>
-<body>
-<div class="limiter">
-    <div class="container">
-        <div class="table100">
-            <div class="toolbar">
-                <button class="button"> <img src="Setting.svg" alt="Setting"/> </button>
+<body class="container">
+<div>
+    <div class="toolbar">
+        <form action="configure" method="post">
 
-                <button class="button"> <img src="apps.svg"  alt="Setup"/> </button>
+            <button class="button"><img src="Setting.svg" alt="Setting"/></button>
 
-                <button class="button"> <img src="SetupWiFi.svg" alt="WiFi_Manager"/> </button>
-            </div>
-            <div class="dashboard">
-                status
-            </div>
-        </div>
+            <button class="button"><img src="apps.svg" alt="Setup"/></button>
+
+            <button class="button" value="SetupWiFi"><img src="SetupWiFi.svg" alt="WiFi_Manager"/><a href="wifi_manager.html"></a>
+</button>
+        </form>
+
+    </div>
+    <div class="body">
+        status
     </div>
 </div>
+
 
 </body>
 </html>
