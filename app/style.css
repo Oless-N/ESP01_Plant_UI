@@ -1,14 +1,9 @@
 .container {
     width: 100%;
     min-height: 100vh;
-    background: #a450c8;
-    background: -webkit-linear-gradient(45deg, #4158d0, #c850c0);
-    background: -o-linear-gradient(45deg, #4158d0, #c850c0);
-    background: -moz-linear-gradient(45deg, #4158d0, #c850c0);
-    background: linear-gradient(45deg, #4158d0, #c850c0);
-
-    display: -webkit-box;
-    display: -webkit-flex;
+    background: #56CCF2;
+    background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);
+    background: linear-gradient(to right, #2F80ED, #56CCF2);
     display: -moz-box;
     display: -ms-flexbox;
     display: block;
@@ -19,12 +14,13 @@
 
 .header {
     font-size: 22px;
+    font-variant: titling-caps;
     text-align: center;
     text-decoration: none;
     font-family: SansSerif, sans-serif;
     width: 100%;
     color: rgb(31, 4, 150);
-    margin: 30px;
+    margin: 10px;
 }
 
 .body_box {
@@ -36,7 +32,8 @@
     display: block;
     margin: auto;
     margin-top: 10px;
-
+    padding-top: 10px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
     align-items: center;
     align-content: center;
@@ -48,6 +45,13 @@
     margin-left: auto;
     margin-right: auto;
 }
+.ssids {
+    color: rgb(31, 4, 150);
+}
+
+.input_password {
+    color: rgb(31, 4, 150);
+}
 
 .input_line{
     border-radius: 12px;
@@ -55,6 +59,7 @@
     width: 50%;
     height: 30px;
     margin: 10px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .button {
     background-color: #191794;
