@@ -35,10 +35,10 @@ esptool: esptool.py
 
 frameworks:
 	sudo rm -rf micropython
-	sudo rm -rf micropyserver
+	sudo rm -rf MicroWebSrv2
 	sudo rm -rf mpython-docs
 	git clone https://github.com/micropython/micropython.git
-	git clone https://github.com/troublegum/micropyserver.git
+	git clone https://github.com/jczic/MicroWebSrv2.git
 	git clone https://github.com/labplus-cn/mpython-docs.git
 
 setup_dev:
@@ -90,9 +90,9 @@ repl:
 	picocom $(PORT) -b$(BAUDRATE)
 
 # Work with file at device
+PRJ_DIR = app/
 upload:
-	#ampy --port $(PORT) --baud $(BAUDRATE) put app\boot.py
-	ampy --port $(PORT) --baud $(BAUDRATE) put $(wildcard *)
+	@for file in $(shell ls $(PRJ_DIR)); do ampy --port $(PORT) --baud $(BAUDRATE) put ${PRJ_DIR}$${file}; done
 
 ls:
 	ampy --port $(PORT) --baud $(BAUDRATE) ls
