@@ -14,9 +14,10 @@
 ## verify_flash, erase_flash, erase_region, version                ##
 #####################################################################
 
-PORT = /dev/ttyUSB0
+#PORT = /dev/ttyUSB0
 #PORT = /dev/ttyUSB1
 #PORT = /dev/cu.usbserial-0001
+PORT = /dev/cu.usbserial-1420
 
 #BAUDRATE = 460800
 BAUDRATE = 115200
@@ -53,12 +54,21 @@ setup_dev_mac:
 	brew install picocom
 	pip install -r requirements.txt
 	make frameworks
+	cd micropython
+	make -C mpy-cross
+
+
+build_and_burn:
+	cd micropython
+	cd esp8266
+	make axtls
+	make
+	make PORT=$(PORT) FLASH_MODE=qio FLASH_SIZE=32m deploy
 
 ports:
 	 dmesg | grep tty
 
 ports_mac:
-	ls /dev/tty.*
 	ls /dev/cu.*
 
 permission:
@@ -88,6 +98,9 @@ burn_micro:	#default baud rate 115200
 
 repl:
 	picocom $(PORT) -b$(BAUDRATE)
+
+miniterm:
+	miniterm.py $(PORT) $(BAUDRATE)
 
 # Work with file at device
 PRJ_DIR = app/
