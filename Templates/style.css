@@ -2,8 +2,8 @@
     width: 100%;
     min-height: 100vh;
     background: #56CCF2;
-    background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);
-    background: linear-gradient(to right, #2F80ED, #56CCF2);
+    background: -webkit-linear-gradient(to right, #26B1ED, #06E1FF);
+    background: linear-gradient(to right, #26B1ED, #06E1FF);
     display: -moz-box;
     display: -ms-flexbox;
     display: block;
@@ -19,19 +19,31 @@
     text-decoration: none;
     font-family: SansSerif, sans-serif;
     width: 100%;
-    color: rgb(31, 4, 150);
+    color: #356C9E;
     margin: 10px;
 }
+
+.select_ssid {
+    color: #356C9E;
+    border-radius: 12px;
+    border: none;
+    width: 50%;
+    height: 30px;
+    margin: 10px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+   }
 
 .body_box {
     width: 97%;
     float: left;
-    background-color: rgba(239, 241, 239, 0.3);
+    background-color: rgba(239, 241, 239, 0.8);
     border-radius: 12px;
     border: none;
     display: block;
     margin: auto;
     margin-top: 10px;
+    margin-left: 10px;
     padding-top: 10px;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
@@ -47,11 +59,11 @@
 }
 
 .ssids {
-    color: rgb(31, 4, 150);
+    color: #356C9E;
 }
 
 .input_password {
-    color: rgb(31, 4, 150);
+    color: #356C9E;
 }
 
 .input_line {
@@ -64,7 +76,7 @@
 }
 
 .button {
-    background-color: #191794;
+    background-color: #356C9E;
     border-radius: 12px;
     border: none;
     color: white;
