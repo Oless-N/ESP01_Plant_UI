@@ -15,7 +15,7 @@ tools = PopulateTools()
 
 def ssid_populate(wifi_list, wifi_manager_page=None):
     if wifi_manager_page is None:
-        wifi_manager_page = open('Templates/wifi_manager.html').read()
+        wifi_manager_page = open('template/wifi_manager.html').read()
     template_wifi_manager = Template(wifi_manager_page)
     data = tools.combobox_populate(wifi_list)
 
@@ -24,7 +24,7 @@ def ssid_populate(wifi_list, wifi_manager_page=None):
 
 def main_populate(data, template_index_page=None):
     if template_index_page is None:
-        template_index_page = open('Templates/index.html').read()
+        template_index_page = open('template/index.html').read()
     template_index = Template(template_index_page)
     data = tools.struct_populate(data)
 
