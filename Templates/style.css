@@ -121,3 +121,11 @@
     justify-content: space-between;
     padding: 177px 130px 33px 95px;
 }
+
+
+.toggle-box{
+  font-family: SansSerif, sans-serif;
+  color: #356C9E;
+    align-items: center;
+}
+
