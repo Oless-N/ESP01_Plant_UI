@@ -95,12 +95,14 @@ def do_connect(ssid, password):
         print('\nFailed. Not Connected to: ' + ssid)
     return connected
 
+
 def send_header(client, status_code=200, content_length=None):
     client.sendall("HTTP/1.0 {} OK\r\n".format(status_code))
     client.sendall("Content-Type: text/html\r\n")
     if content_length is not None:
         client.sendall("Content-Length: {}\r\n".format(content_length))
     client.sendall("\r\n")
+
 
 def send_response(client, payload, status_code=200):
     content_length = len(payload)
@@ -172,6 +174,7 @@ def handle_root(client):
     """ % dict(filename=NETWORK_PROFILES))
     client.close()
 
+
 def handle_configure(client, request):
     match = ure.search("ssid=([^&]*)&password=(.*)", request)
 
@@ -234,8 +237,10 @@ def handle_configure(client, request):
         send_response(client, response)
         return False
 
+
 def handle_not_found(client, url):
     send_response(client, "Path not found: {}".format(url), status_code=404)
+
 
 def stop():
     global server_socket
@@ -243,6 +248,7 @@ def stop():
     if server_socket:
         server_socket.close()
         server_socket = None
+
 
 def start(port=80):
     global server_socket
