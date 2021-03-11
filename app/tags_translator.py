@@ -13,7 +13,7 @@ class PopulateTools:
 tools = PopulateTools()
 
 
-def ssid_populate(wifi_list, wifi_manager_page=None):
+def setup_template(wifi_list, wifi_manager_page=None):
     if wifi_manager_page is None:
         wifi_manager_page = open('template/wifi_manager.html').read()
     template_wifi_manager = Template(wifi_manager_page)
