@@ -1,6 +1,6 @@
 import pytest
 
-from app.tags_translator import PopulateTools
+from app.setup_ui import PopulateTools
 
 
 @pytest.fixture

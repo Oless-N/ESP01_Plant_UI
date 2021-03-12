@@ -14,6 +14,11 @@
     padding: 10px;
 }
 
+.header img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 .header {
     font-size: 22px;
     font-variant: titling-caps;

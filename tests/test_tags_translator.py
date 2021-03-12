@@ -1,4 +1,4 @@
-from app.tags_translator import ssid_populate
+from app.setup_ui import ssid_populate
 
 
 def test_combobox_populate(get_list, tag_tools):
