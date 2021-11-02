@@ -1,0 +1,136 @@
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background: #56CCF2;
+    background: -webkit-linear-gradient(to right, #26B1ED, #06E1FF);
+    background: linear-gradient(to right, #26B1ED, #06E1FF);
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 10px;
+    padding: 10px;
+}
+
+.header img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.header {
+    font-size: 22px;
+    font-variant: titling-caps;
+    text-align: center;
+    text-decoration: none;
+    font-family: SansSerif, sans-serif;
+    width: 100%;
+    color: #356C9E;
+    margin: 10px;
+    float:left;
+    padding: 10px;
+}
+
+.select_ssid {
+    color: #356C9E;
+    border-radius: 12px;
+    border: none;
+    width: 50%;
+    height: 30px;
+    margin: 10px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+   }
+
+.body_box {
+    width: 92%;
+    float: left;
+    background-color: rgba(239, 241, 239, 0.8);
+    border-radius: 12px;
+    border: none;
+    display: block;
+    margin: 10px;
+    padding: 10px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    align-items: center;
+    align-content: center;
+}
+
+.body button{
+    width: 98%;
+}
+.body {
+    font-family: SansSerif, sans-serif;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin: 10px;
+    padding: 10px;
+}
+
+
+.ssids {
+    color: #356C9E;
+}
+
+.input_password {
+    color: #356C9E;
+}
+
+.input_line {
+    border-radius: 12px;
+    border: none;
+    width: 50%;
+    height: 30px;
+    margin: 10px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.button {
+    background-color: #356C9E;
+    border-radius: 12px;
+    border: none;
+    color: white;
+    width: 100%;
+    height: 40px;
+    margin: 5px;
+    padding: 5px;
+    display: block;
+    float: left;
+    font-size: 16px;
+    font-family: SansSerif, sans-serif;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.button img {
+    text-align: center;
+    height: 24px;
+    width: 24px;
+}
+
+.wrap-login100 {
+    width: 960px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 177px 130px 33px 95px;
+}
+
+
+.toggle-box{
+  font-family: SansSerif, sans-serif;
+  color: #356C9E;
+    align-items: center;
+}
+
