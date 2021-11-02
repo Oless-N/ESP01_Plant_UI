@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta http-equiv="refresh" content="5" >
 <head>
     <meta charset="UTF-8">
     <link href="img/favicon.ico" rel="icon" type="image/png"/>
@@ -15,15 +16,32 @@
         <div class="body">
 
             <form action="setup.html">
-                <button class="button"><img src="img/Setup.svg" alt="Setting"/></button>
+                <button class="button" id="setup_but"><img src="img/Setup.svg" alt="Setting"/></button>
+                <script>
+                    var relay = document.getElementById("setup_but");
+                    function relay_inverse() {
+                        var request = new XMLHttpRequest();
+                        request.open('GET','/relay_switch',false);
+                        request.send();
+                    }
+                    relay.addEventListener('click', relay_inverse);
+                </script>
             </form>
             <form action="settings.html">
                 <button class="button"><img src="img/Setting.svg" alt="Setup"/></button>
             </form>
         </div>
     </div>
-    <div class="body_box">
-        status
+    <div class="body_box" id="body_box">
+         <script>
+            var relay = document.getElementById("body_box");
+            function relay_inverse() {
+                var request = new XMLHttpRequest();
+                request.open('GET','/relay_switch',false);
+                request.send();
+            }
+            relay.addEventListener('click', relay_inverse);
+        </script>
     </div>
 </div>
 

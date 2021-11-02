@@ -14,8 +14,8 @@
 ## verify_flash, erase_flash, erase_region, version                ##
 #####################################################################
 
-PORT = /dev/ttyUSB0
-#PORT = /dev/ttyUSB1
+#PORT = /dev/ttyUSB0
+PORT = /dev/ttyUSB1
 #PORT = /dev/cu.usbserial-0001
 #PORT = /dev/cu.usbserial-1420
 
@@ -36,18 +36,17 @@ esptool: esptool.py
 
 frameworks:
 	sudo rm -rf micropython
-	sudo rm -rf MicroWebSrv2
-	sudo rm -rf mpython-docs
+	sudo rm -rf MicroWebSrv
 	git clone https://github.com/micropython/micropython.git
-	git clone https://github.com/jczic/MicroWebSrv2.git
-	git clone https://github.com/labplus-cn/mpython-docs.git
+	git clone https://github.com/jczic/MicroWebSrv.git
 
 setup_dev:
 	sudo apt-get install git wget flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache libffi-dev libssl-dev dfu-util
 	sudo apt-get install esptool
 	sudo apt install picocom
-	pip3 install -r requirements.txt
+	pip install -r requirements.txt
 	make frameworks
+
 
 setup_dev_mac:
 	brew install esptool

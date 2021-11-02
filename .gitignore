@@ -3,8 +3,6 @@
 /.idea/
 /venv/
 /micropython/
-/mpython-docs/
-/micropyserver/
-/MicroWebSrv2/
 */__pycache__/
 __pycache__
+/MicroWebSrv/

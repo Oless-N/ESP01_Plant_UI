@@ -3,27 +3,27 @@ try:
 except:
   import socket
 
-from machine import Pin
-import network
-
+from main import main
+# import network
 import esp
-esp.osdebug(None)
-
 import gc
 gc.collect()
+esp.osdebug(None)
 
-ssid = 'YOUR_PLANT'
-password = 'your_plant'
+#
+# ssid = 'Plant_01'
+# password = 'yourplant'
+#
+# station = network.WLAN(network.STA_IF)
+#
+# station.active(True)
+# station.connect(ssid, password)
+#
+# while station.isconnected() == False:
+#   pass
+#
+# print('Connection successful')
+# print(station.ifconfig())
 
-station = network.WLAN(network.STA_IF)
-
-station.active(True)
-station.connect(ssid, password)
-
-while station.isconnected() == False:
-  pass
-
-print('Connection successful')
-print(station.ifconfig())
-
-led = Pin(2, Pin.OUT)
+gc.collect()
+main()
