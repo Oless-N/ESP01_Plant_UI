@@ -14,8 +14,8 @@
 ## verify_flash, erase_flash, erase_region, version                ##
 #####################################################################
 
-#PORT = /dev/ttyUSB0
-PORT = /dev/ttyUSB1
+PORT = /dev/ttyUSB0
+#PORT = /dev/ttyUSB1
 #PORT = /dev/cu.usbserial-0001
 #PORT = /dev/cu.usbserial-1420
 
@@ -27,7 +27,8 @@ BAUDRATE = 115200
 CHIP = esp8266
 #CHIP = esp32
 
-FIRMWARE = esp8266-1m-20210902-v1.17.bin
+#FIRMWARE = esp8266-1m-20210902-v1.17.bin
+FIRMWARE = esp8266-1m-20200902-v1.13.bin
 #FIRMWARE = esp32spiram-idf3-20200902-v1.13.bin
 #FIRMWARE = esp32-idf3-20200902-v1.13.bin
 
